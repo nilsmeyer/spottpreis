@@ -1,13 +1,18 @@
-# ec2spotter - Discover spot prices for AWS EC2 Instance
+# spottpreis - Discover spot prices for AWS EC2 Instance
 ## Description
 This is a small helper for discovering the cheapest instance type in a region
 and within availability zones. It can be used to automate bidding on spot
 instances, returning the last bid for your selection. 
 
+### What's with the name?
+It's a German idiom describing a price that's either knocked down or
+ridiculously low, "spott" meaning ridicule or mockery and price obviously
+translates into price.
+
 ## Installation
 ```bash
-git clone ssh://git@github.com/nilsmeyer/ec2spotter
-cd ec2spotter
+git clone ssh://git@github.com/nilsmeyer/spottpreis
+cd spottpreis
 pip3 install --user . 
 ```
 
@@ -19,7 +24,7 @@ return a list starting with the least expensive.
 You must have an AWS client environment configured and a profile available.
 
 ```
-Usage: ec2spotter [OPTIONS]
+Usage: spottpreis [OPTIONS]
 
 Options:
   -r, --region TEXT              AWS region to use (default eu-west-1)
@@ -34,26 +39,26 @@ Options:
 ### Examples
 #### find cheapest instance in all AZs
 ```bash
-ec2spotter --cheapest --instance-type c5.large --instance-type c5n.large \
+spottpreis --cheapest --instance-type c5.large --instance-type c5n.large \
 --instance-type c5d.large
 ```
 
 #### instances ordered by last bid in all AZs
 ```bash
-ec2spotter --instance-type c5.large --instance-type c5n.large \ 
+spottpreis --instance-type c5.large --instance-type c5n.large \ 
 --instance-type c5d.large
 ```
 
 #### cheapest in eu-west-1c
 ```bash
-ec2spotter --instance-type c5.large --instance-type c5n.large \
+spottpreis --instance-type c5.large --instance-type c5n.large \
 --instance-type c5d.large --instance-type m5.large --instance-type r5.large \
 --availability-zone eu-west-1c --cheapest
 ```
 
 #### shortening the zone is supported
 ```bash
-ec2spotter --availability-zone b --availability-zone c \
+spottpreis --availability-zone b --availability-zone c \
 --instance-type c5.large --instance-type c5n.large --instance-type c5d.large
 ```
 
