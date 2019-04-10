@@ -27,13 +27,16 @@ You must have an AWS client environment configured and a profile available.
 Usage: spottpreis [OPTIONS]
 
 Options:
-  -r, --region TEXT              AWS region to use (default eu-west-1)
+  -r, --region TEXT             AWS region to use
   -z, --availability-zone TEXT  Availability Zones to use, use 'all' for all
-                                 zones
-  -t, --instance-type TEXT      Instance types to use
+                                zones, multiple invocations supported, default
+                                all
+  -t, --instance-type TEXT      Instance types to use, multiple invocations
+                                supported, default t3.micro
   --cheapest / --all
-  -f, --format [json|text]       output format
-  --help                         Show this message and exit.
+  -p, --profile TEXT            AWS profile to use
+  -f, --format [json|text]      output format
+  --help                        Show this message and exit.
 ```
 
 ### Examples

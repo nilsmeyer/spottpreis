@@ -6,16 +6,25 @@ from sys import exit
 
 
 @click.command()
-@click.option('-r', '--region', help='AWS region to use', default="eu-west-1")
+@click.option('-r', '--region', help='AWS region to use')
 @click.option('-z', '--availability-zone', multiple=True,
               help="Availability Zones to use, use 'all' for all zones, multiple invocations supported, default all",
               default=["all"])
 @click.option('-t', '--instance-type', multiple=True,
               help="Instance types to use, multiple invocations supported, default t3.micro", default=["t3.micro"])
 @click.option('--cheapest/--all', default=False)
+@click.option('-p', '--profile', help="AWS profile to use")
 @click.option('-f', '--format', type=click.Choice(['json', 'text']), help="output format", default='text')
-def cli(region, availability_zone, instance_type, format, cheapest):
-    ec2 = boto3.client("ec2", region_name=region)
+def cli(region, availability_zone, instance_type, format, profile, cheapest):
+    if profile is not None:
+        session = boto3.Session(profile_name=profile)
+    else:
+        session = boto3.Session()
+
+    if region is not None:
+        ec2 = session.client("ec2", region_name=region)
+    else:
+        ec2 = session.client("ec2")
 
     az_query = ec2.describe_availability_zones()
     az_available = []

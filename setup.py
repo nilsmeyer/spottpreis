@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='spottpreis',
-    version='0.1',
+    version='0.2',
     py_modules=['spottpreis'],
     install_requires=[
         'boto3', 'Click'
